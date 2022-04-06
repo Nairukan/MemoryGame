@@ -7,9 +7,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Compile Update="View\AbsForm.cs">
-        <SubType>Form</SubType>
-      </Compile>
+        <Compile Update="View\AbsForm.cs">
+            <SubType>Form</SubType>
+        </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Reference Include="Microsoft.VisualBasic.Compatibility"/>
+        <Reference Include="System.Web"/>
     </ItemGroup>
 
 </Project>
