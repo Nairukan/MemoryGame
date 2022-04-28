@@ -239,5 +239,20 @@ namespace MermoryGame
             FontLevels[0].Add(radioGroup);
             return radioGroup;
         }
+
+        public UpgradeNumberUpDown
+            AddNumberUpDown(string name,
+                System.Windows.Forms.Control Owner = null) //Функция добавления  к окну улучшенной кнопки
+        {
+            //По аналогии
+            var NumberUpDown = new UpgradeNumberUpDown();
+            NumberUpDown.Name = name;
+            if (Owner == null)
+                Controls.Add(NumberUpDown); //Добовляем его к  окну
+            else
+                Owner.Controls.Add(NumberUpDown);
+            FontLevels[0].Add(NumberUpDown);
+            return NumberUpDown;
+        }
     }
 }
