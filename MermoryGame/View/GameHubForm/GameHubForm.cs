@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using CourseWork;
 using MermoryGame.Control;
 
 namespace MermoryGame
 {
     public class GameHubForm : AbsForm //Класс окно игровой комнаты(лобби), наследуемся от базового класа
     {
-        public List<string> ActiveUsername = new List<string>(); //Список логинов авторизированных игроков
+        public List<User> ActiveUsername = new List<User>(); //Список авторизированных игроков
         public List<UpgradeButton> PlayersButton = new List<UpgradeButton>(); //Список кнопок в меню лобби
 
         public GameHubForm() //После выполнения конструктора род. класса выполняем следующее
@@ -72,6 +73,44 @@ namespace MermoryGame
             SettingsPanel.BackColor = Color.LightGray;
             countFontLayers++;
 
+            var GameSetMaxScoreTextP1 = AddLabel("GameSetMaxScoreTextP1", SettingsPanel);
+            GameSetMaxScoreTextP1.SetGeometry(5, 10, 120, 60);
+            GameSetMaxScoreTextP1.Text = "Игра до ";
+            GameSetMaxScoreTextP1.TextAlign = ContentAlignment.MiddleRight;
+            AddToFontLevel(3, GameSetMaxScoreTextP1);
+
+            var GameSetMaxScore = AddNumberUpDown("GameSetMaxScore", SettingsPanel);
+            GameSetMaxScore.SetGeometry(126, 26, 84, 60);
+            GameSetMaxScore.Value = 100;
+            GameSetMaxScore.Minimum = 1;
+            GameSetMaxScore.Maximum = 10000;
+            AddToFontLevel(3, GameSetMaxScore);
+
+            var GameSetMaxScoreTextP2 = AddLabel("GameSetMaxScoreTextP1", SettingsPanel);
+            GameSetMaxScoreTextP2.SetGeometry(210, 10, 120, 60);
+            GameSetMaxScoreTextP2.Text = " очков";
+            GameSetMaxScoreTextP2.TextAlign = ContentAlignment.MiddleLeft;
+            AddToFontLevel(3, GameSetMaxScoreTextP2);
+
+            var GameSetTimeTextP1 = AddLabel("GameSetTimeTextP1", SettingsPanel);
+            GameSetTimeTextP1.SetGeometry(5, 80, 120, 60);
+            GameSetTimeTextP1.Text = "Время на ход ";
+            GameSetTimeTextP1.TextAlign = ContentAlignment.MiddleRight;
+            AddToFontLevel(3, GameSetTimeTextP1);
+
+            var GameSetTime = AddNumberUpDown("GameSetTime", SettingsPanel);
+            GameSetTime.SetGeometry(126, 96, 84, 60);
+            GameSetTime.Value = 60;
+            GameSetTime.Minimum = 20;
+            GameSetTime.Maximum = 10000;
+            AddToFontLevel(3, GameSetTime);
+
+            var GameSetTimeTextP2 = AddLabel("GameSetTimeTextP2", SettingsPanel);
+            GameSetTimeTextP2.SetGeometry(210, 80, 120, 60);
+            GameSetTimeTextP2.Text = " секунд";
+            GameSetTimeTextP2.TextAlign = ContentAlignment.MiddleLeft;
+            AddToFontLevel(3, GameSetTimeTextP2);
+
             var ChildModeRadioGroup =
                 AddRadioGroup("ChildModeRadioGroup",
                     SettingsPanel); //Создаём элмент выбора одного из множества(Почитай ниже про него)
@@ -79,7 +118,7 @@ namespace MermoryGame
             ChildModeRadioGroup.SetGeometry(10, 160, 320, 100); //Размер и позиция
             ChildModeRadioGroup.AddNewElement("Нет"); //Первый выриант для выбора
             ChildModeRadioGroup.AddNewElement("Да"); //Второй вариант
-            AddToFontLevel(3, SettingsPanel);
+            AddToFontLevel(3, ChildModeRadioGroup);
 
             var StartGameButton = AddButton("StartGameButton"); //Создаём элмент управления
             StartGameButton.Text = "Начать игру"; //Меняем содержимое
